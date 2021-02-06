@@ -1,0 +1,4 @@
+-   PubSub:  `redis`
+-   Databases:  `mysql`  
+-   Framework:  `express`
+-   Deployment:  `docker`  with  `docker-compose`
