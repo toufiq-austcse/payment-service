@@ -1,15 +1,3 @@
-**Get Payment Options**
-
-GET /payments/options
-
-RESPONSE 200 OK
-
-    [
-	    {
-			id:1,
-			name:"sslcommerz"
-	    }
-    ]
 **Initiate Transaction**
 
 POST /transactions/initiate
