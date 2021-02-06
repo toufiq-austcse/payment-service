@@ -6,7 +6,8 @@
                 order_id:1,
                 transaction_id:1,
                 amount: 50.00,
-                status: "VALID"
+                status: "VALID", //VALID, FAILED,CANCELLED,UNATTEMPTED,EXPIRED
+                error:""
         }
 
 
@@ -30,5 +31,6 @@
                 order_id:1,
                 refund_id:1,
                 amount: 25.00,
-                status:"REFUNDED"
+                status:"REFUNDED", //REFUNDED,CANCELLED
+                error:""
         }
