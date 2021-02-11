@@ -16,7 +16,6 @@
         topic:"refunds"
         type:"CREATE"
         data:{
-                option_id:1,
                 transaction_id:1,
                 refund_amount:50.00,
                 refund_remarks:"reason of refund"     
