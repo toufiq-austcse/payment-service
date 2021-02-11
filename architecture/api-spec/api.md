@@ -5,7 +5,6 @@ POST /transactions/initiate
 BODY 
 
         {
-		option_id:1,
 		order_id:2,
 		total_amount: 150.00
 		currency: 'BDT',
