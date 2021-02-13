@@ -5,28 +5,29 @@ POST /transactions/initiate
 BODY 
 
         {
-		order_id:2,
-		total_amount: 150.00
-		currency: 'BDT',
-		success_url: '',
-		fail_url:'',
-		cancel_url:'',
-		cus_name:'',
-		cus_email:'',
-		cus_add:'',
-		cus_city:'',
-		cus_postcode:'',
-		cus_country:'',
-		cus_phone:'',
-		num_of_item:'',
+		orderId:2,
+		totalAmount: 150.00,
+		successUrl: '',
+		failUrl:'',
+		cancelUrl:'',
+		customer:{
+			name:'',
+			email:'',
+			address:'',
+			city:'',
+			postcode:'',
+			country:'',
+			phone:'',
+
+		},
+		noOfItems:'',
+
         }
 
-RESPONSE 201 Created
+RESPONSE 302 Redirect
 
         {
-	    "transaction_id":1,
-	    "session_key":"",
-	    "gateway_page_url":""
+	    "gatewayPageUrl":""
 	}
 
 
