@@ -5,19 +5,24 @@ require('module-alias/register');
 const apiRoute = require('@api');
 const bootstrapper = require('@core/bootstrapper');
 const commonErrorHandler = require('@core/commonErrorHandler');
+const connManager = require('@core/connectionManager');
 const config = require('@config');
 const shutDownManager = require('@core/shutdownManager');
-const logger = require('@core/logger');
-
+const { mysql } = require('./common/orms');
+const middlewares = require('./common/middlewares');
+const { logger } = require('handlebars');
 /**
  * Creates a server instance
  * @param {*} options Options; can contain either a `clientPath` or `indexPath` together with
  * a `resourcesPath`.
  */
-function start(options) {
+async function start(options) {
   options = options || {};
+  options.middlewares = [middlewares.dbProvider.includeDatabase(mysql)];
+
   const port = options.port || config.DEFAULT_PORT;
   const app = _createApp(options);
+  await _initializeDependentConnections();
   return app.listen(port, function () {
     logger.log(`server started on port ${port}`);
   });
@@ -40,7 +45,8 @@ function autoManageShutdown(server) {
 function _createApp(options) {
   let app;
   options = options || {};
-  const { clientDirPath, indexPath, staticDirPath } = options;
+  const { clientDirPath, indexPath, staticDirPath, middlewares } = options;
+  console.log(options);
   /**
    * App is bootstrapped only after all the models and routes have
    * been loaded using `apiRoute`
@@ -51,6 +57,7 @@ function _createApp(options) {
     app = bootstrapper.initiate(clientDirPath);
   }
 
+  middlewares.forEach((middleware) => app.use(middleware));
   // apis are available under /api prefix
   app.use('/api', apiRoute);
 
@@ -59,6 +66,16 @@ function _createApp(options) {
 
   return app;
 }
+
+/**
+ * All connections to database instance, redis instance etc.
+ * should be done inside this function.
+ */
+async function _initializeDependentConnections() {
+  //await connManager.connectMysql();
+  // the other connections to be made, should follow here
+}
+
 
 module.exports = {
   autoManageShutdown,

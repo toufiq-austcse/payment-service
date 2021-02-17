@@ -1,5 +1,5 @@
 const server = require('./server');
-
+require('dotenv').config()
 function options() {
   let options = {};
   options.port = process.env.PORT;
@@ -9,4 +9,10 @@ function options() {
   return options;
 }
 
-server.autoManageShutdown(server.start(options()));
+/**
+ * Initialize the service and start managing it.
+ */
+(async function () {
+  const service = await server.start(options());
+  server.autoManageShutdown(service);
+})();

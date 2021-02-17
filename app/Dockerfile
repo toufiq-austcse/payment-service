@@ -1,13 +1,9 @@
-FROM mhart/alpine-node:12.16.2
+FROM node:lts-alpine3.9
+EXPOSE 8282
 
-WORKDIR /var/app
-
-COPY package*.json ./
-
-RUN npm install
-
+ENV SERVICE_HOME /service
+RUN mkdir -p $SERVICE_HOME
+RUN apk add --no-cache bash
+WORKDIR $SERVICE_HOME
 COPY . .
-
-EXPOSE 8082
-
-CMD ["npm", "start"]
+RUN npm ci --production
