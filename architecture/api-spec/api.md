@@ -5,24 +5,22 @@ POST /transactions/initiate
 BODY 
 
         {
-		orderId:2,
-		totalAmount: 150.00,
-		successUrl: '',
-		failUrl:'',
-		cancelUrl:'',
-		customer:{
-			name:'',
-			email:'',
-			address:'',
-			city:'',
-			postcode:'',
-			country:'',
-			phone:'',
-
+		"orderId": 2,
+		"totalAmount": 150.00,
+		"successUrl": "https://google.com",
+		"failUrl": "https://google.com",
+		"cancelUrl": "https://google.com",
+		"customer": {
+			"name": "Md. Toufiqul Islam",
+			"email": "***toufiq.austcse***@gmail.com",
+			"address": "***123***",
+			"city": "Dhaka",
+			"postcode": "***1219***",
+			"country": "Bangladesh",
+			"phone": "+88012*******"
 		},
-		noOfItems:'',
-
-        }
+		"noOfItems": 1
+	}	
 
 RESPONSE 302 Redirect
 
