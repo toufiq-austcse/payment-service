@@ -7,8 +7,16 @@ const router = express.Router({ mergeParams: true });
 
 const TransactionController = require('./controller');
 
-router.post('/one', async (req, res) => {
-  res.status(statusCodes.OK).send(await TransactionController.create(req, req.body));
+router.post('/initiate', async (req, res) => {
+  try {
+    let redirectGatewayURL = await TransactionController.create(req, req.body);
+    res.redirect(redirectGatewayURL);
+  } catch (e) {
+    res.status(statusCodes.INTERNAL_SERVER_ERROR).send({
+      message: e.message
+    })
+  }
+
 });
 
 module.exports = router;

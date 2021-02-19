@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const modelProvider = require('../common/middlewares/model-provider')
 
 // Any new resource api should imported here and then registered to
 // router with proper api endpoint prefix (e.g /user user.route, /items items.route etc.)
@@ -15,7 +16,7 @@ const transactions = require('./transactions');
 // api resources, this works as placeholder to inject new routes.
 //
 // If you add a require manually, add it above the /** --route-- */ line.
-router.use(transactions.config.ENDPOINT, transactions.route);
+router.use(transactions.config.ENDPOINT, modelProvider.includeModel(transactions.model), transactions.route);
 /** --route-- */
 
 module.exports = router;

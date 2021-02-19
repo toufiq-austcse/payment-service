@@ -1,4 +1,4 @@
-const mysql = require('./sequelize');
+const sequelize = require('./sequelize');
 module.exports = {
-        mysql
+        sequelize
 }

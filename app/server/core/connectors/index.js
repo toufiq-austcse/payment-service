@@ -1,4 +1,5 @@
 const sequelize = require('./sequelize');
 module.exports = {
-        sequelize: sequelize.getInstance
+        getSeqInstance: sequelize.getSeqInstance,
+        connectToMySql: sequelize.connectToMysql
 }

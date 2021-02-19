@@ -15,6 +15,12 @@ module.exports = (sequelize) => {
                 },
                 bank_transaction_id: {
                         type: DataTypes.STRING
+                },
+                ssl_transaction_id:{
+                        type: DataTypes.STRING
+                },
+                ssl_session_key:{
+                        type: DataTypes.STRING
                 }
         });
         Transaction.sync();

@@ -5,10 +5,10 @@ require('module-alias/register');
 const apiRoute = require('@api');
 const bootstrapper = require('@core/bootstrapper');
 const commonErrorHandler = require('@core/commonErrorHandler');
-const connManager = require('@core/connectionManager');
+const sequelizeConnector = require('./core/connectors/sequelize');
 const config = require('@config');
 const shutDownManager = require('@core/shutdownManager');
-const { mysql } = require('./common/orms');
+const { sequelize } = require('./common/orms');
 const middlewares = require('./common/middlewares');
 const { logger } = require('handlebars');
 /**
@@ -18,7 +18,7 @@ const { logger } = require('handlebars');
  */
 async function start(options) {
   options = options || {};
-  options.middlewares = [middlewares.dbProvider.includeDatabase(mysql)];
+  options.middlewares = [middlewares.ormProvider.includeOrm(sequelize)];
 
   const port = options.port || config.DEFAULT_PORT;
   const app = _createApp(options);
@@ -46,7 +46,6 @@ function _createApp(options) {
   let app;
   options = options || {};
   const { clientDirPath, indexPath, staticDirPath, middlewares } = options;
-  console.log(options);
   /**
    * App is bootstrapped only after all the models and routes have
    * been loaded using `apiRoute`
@@ -72,7 +71,7 @@ function _createApp(options) {
  * should be done inside this function.
  */
 async function _initializeDependentConnections() {
-  //await connManager.connectMysql();
+  await sequelizeConnector.connectToMysql();
   // the other connections to be made, should follow here
 }
 
