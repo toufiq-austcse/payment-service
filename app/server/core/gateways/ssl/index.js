@@ -52,6 +52,25 @@ async function initiateTransaction(order) {
 
 }
 
+async function validateByTrxId(trxId) {
+        const { STORE_ID, STORE_PASSWORD } = process.env;
+        try {
+                let sslRes = await axios.get(SSL_BASE_URL + '/validator/api/merchantTransIDvalidationAPI.php', {
+                        params: {
+                                tran_id: trxId,
+                                store_id: STORE_ID,
+                                store_passwd: STORE_PASSWORD
+                        }
+                })
+                return sslRes.data;
+
+        } catch (e) {
+                console.log(e.message);
+                throw new Error(e);
+        }
+}
+
 module.exports = {
-        initiateTransaction
+        initiateTransaction,
+        validateByTrxId
 }

@@ -4,7 +4,8 @@ const config = {
     initiated: 'INITIATED',
     completed: 'COMPLETED',
     failed: 'FAILED'
-  }
+  },
+  UNVERIFIED_TRANSACTION_LIST: 'unverified_transactions'
 };
 
 module.exports = config;

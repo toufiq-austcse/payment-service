@@ -50,6 +50,7 @@
     "mongoose": "^5.11.16",
     "mysql": "^2.18.1",
     "mysql2": "^2.2.5",
+    "node-cron": "^2.0.3",
     "redis": "^3.0.2",
     "sequelize": "^6.5.0",
     "shortid": "^2.2.16"

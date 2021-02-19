@@ -1,5 +1,7 @@
 const sequelize = require('./sequelize');
+const redis = require('./redis');
+
 module.exports = {
-        getSeqInstance: sequelize.getSeqInstance,
-        connectToMySql: sequelize.connectToMysql
+        sequelize,
+        redis
 }

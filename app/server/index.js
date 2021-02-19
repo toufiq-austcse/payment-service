@@ -5,10 +5,11 @@ require('module-alias/register');
 const apiRoute = require('@api');
 const bootstrapper = require('@core/bootstrapper');
 const commonErrorHandler = require('@core/commonErrorHandler');
-const sequelizeConnector = require('./core/connectors/sequelize');
+const connectors = require('./core/connectors');
 const config = require('@config');
 const shutDownManager = require('@core/shutdownManager');
-const { sequelize } = require('./common/orms');
+const orms = require('./common/orms');
+const cache = require('./common/cache');
 const middlewares = require('./common/middlewares');
 const { logger } = require('handlebars');
 /**
@@ -18,7 +19,8 @@ const { logger } = require('handlebars');
  */
 async function start(options) {
   options = options || {};
-  options.middlewares = [middlewares.ormProvider.includeOrm(sequelize)];
+  options.middlewares = [middlewares.ormProvider.includeOrm(orms.sequelize),
+  middlewares.cacheProvider.includeCacheDb(cache.redisCache)];
 
   const port = options.port || config.DEFAULT_PORT;
   const app = _createApp(options);
@@ -71,7 +73,8 @@ function _createApp(options) {
  * should be done inside this function.
  */
 async function _initializeDependentConnections() {
-  await sequelizeConnector.connectToMysql();
+  await connectors.sequelize.connectToMysql();
+  await connectors.redis.connectToRedis();
   // the other connections to be made, should follow here
 }
 

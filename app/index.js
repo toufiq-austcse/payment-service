@@ -1,5 +1,6 @@
 const server = require('./server');
 require('dotenv').config()
+require('./cron');
 function options() {
   let options = {};
   options.port = process.env.PORT;
