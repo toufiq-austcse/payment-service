@@ -3,8 +3,8 @@
         topic: "payments"
         type: "STATUS"
         data : {
-                order_id:1,
-                transaction_id:1,
+                orderId:1,
+                transactionId:1,
                 amount: 50.00,
                 status: "VALID", //VALID, FAILED,CANCELLED,UNATTEMPTED,EXPIRED
                 error:""
@@ -16,9 +16,9 @@
         topic:"refunds"
         type:"CREATE"
         data:{
-                transaction_id:1,
-                refund_amount:50.00,
-                refund_remarks:"reason of refund"     
+                orderId:1,
+                refundAmount:50.00,
+                refundMarks:"reason of refund"     
         }
 
 
@@ -28,8 +28,8 @@
         topic: "refunds",
         type: "STATUS",
         data:{
-                order_id:1,
-                refund_id:1,
+                orderId:1,
+                refundId:1,
                 amount: 25.00,
                 status:"REFUNDED", //REFUNDED,CANCELLED
                 error:""

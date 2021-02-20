@@ -7,8 +7,9 @@ async function connectToRedis() {
         try {
                 if (!redisInstance) {
                         redisInstance = redis.createClient();
+                        logger.log('redis connected');
                 }
-                logger.log('redis connected');
+              
         } catch (error) {
                 logger.log('Redis Connection error ', error)
         }

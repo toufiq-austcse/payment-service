@@ -14,7 +14,13 @@ async function update(model, trxId, data) {
                 }
         })
 }
+
+async function findByOrderId(model, orderId) {
+        let sequelize = await connectors.sequelize.getSeqInstance();
+        return model(sequelize).findOne({ where: { order_id: orderId } });
+}
 module.exports = {
         create,
-        update
+        update,
+        findByOrderId
 }

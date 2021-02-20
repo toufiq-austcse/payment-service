@@ -75,6 +75,7 @@ function _createApp(options) {
 async function _initializeDependentConnections() {
   await connectors.sequelize.connectToMysql();
   await connectors.redis.connectToRedis();
+  await connectors.pubsub.connectToPubsub();
   // the other connections to be made, should follow here
 }
 

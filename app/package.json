@@ -13,7 +13,7 @@
     "@config": "config/"
   },
   "scripts": {
-    "start": "DEBUG=simpleNodeServer node index.js",
+    "start": "DEBUG=payment node index.js",
     "test": "mocha -r server/testHelpers/globals.js server/**/*.test.js",
     "lint": "eslint server/",
     "add-resource": "node ./tools/cli.js"

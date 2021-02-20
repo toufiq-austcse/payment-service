@@ -1,5 +1,5 @@
 FROM node:lts-alpine3.9
-EXPOSE 8282
+EXPOSE 8082
 
 ENV SERVICE_HOME /service
 RUN mkdir -p $SERVICE_HOME

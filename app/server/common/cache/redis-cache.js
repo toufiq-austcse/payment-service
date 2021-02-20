@@ -5,7 +5,6 @@ async function push(key, data) {
         return redis.lpush(key, data);
 }
 async function get(key) {
-        console.log(key);
         let redis = await connectors.redis.getRedisInstance();
         return new Promise((resolve, reject) => {
                 redis.lrange(key, 0, -1, (err, res) => {
