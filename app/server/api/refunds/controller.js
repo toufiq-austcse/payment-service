@@ -2,20 +2,23 @@ const ssl = require('../../core/gateways/ssl');
 const config = require('./config');
 class RefundController {
   static async create(context, data) {
-    let { orm, model, cacheDb } = context;
+    let { orm, transactionModel, refundModel, cacheDb } = context;
     let { refundAmount, orderId, refundMarks } = data;
-    orm.findByOrderId(model, orderId);
-   /*  let refund = {
-      refund_amount: data.refundAmount,
-      status: config.STATUS.initiated,
-      ssl_transaction_id: transactionId,
-      ssl_session_key: sslResponse.sessionkey
+    let transaction = await orm.findByOrderId(transactionModel, orderId);
+    if (transaction) {
+      let refund = {
+        refund_amount: data.refundAmount,
+        status: config.STATUS.initiated,
+        transaction_id: transaction.id
 
+      }
+      await orm.create(refundModel, refund);
     }
-
-    await orm.create(model, transaction);
-    await cacheDb.push(config.UNVERIFIED_TRANSACTION_LIST, transactionId);
-    return sslResponse.GatewayPageURL; */
+    /*  
+ 
+    
+     await cacheDb.push(config.UNVERIFIED_TRANSACTION_LIST, transactionId);
+     return sslResponse.GatewayPageURL; */
   }
 
   /* static async getTransactions(context, query) {

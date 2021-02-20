@@ -11,9 +11,12 @@ module.exports = (sequelize) => {
                 status: {
                         type: DataTypes.STRING
                 },
+                transaction_id: {
+                        type: DataTypes.INTEGER
+                }
 
         });
-        Refund.hasOne(Transaction.model,{
+        Refund.hasOne(Transaction.model(sequelize), {
                 foreignKey: 'transaction_id'
         })
         Refund.sync();

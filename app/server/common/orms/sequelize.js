@@ -15,12 +15,16 @@ async function update(model, trxId, data) {
         })
 }
 
-async function findByOrderId(model, orderId) {
+async function findTransactionByOrderId(model, orderId) {
         let sequelize = await connectors.sequelize.getSeqInstance();
-        return model(sequelize).findOne({ where: { order_id: orderId } });
+        let transaction = await model(sequelize).findOne({ where: { order_id: orderId } });
+        if(!transaction){
+                return null;
+        }
+        return transaction.dataValues;
 }
 module.exports = {
         create,
         update,
-        findByOrderId
+        findByOrderId: findTransactionByOrderId
 }
