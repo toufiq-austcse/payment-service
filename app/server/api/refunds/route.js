@@ -7,7 +7,6 @@ const router = express.Router({ mergeParams: true });
 
 const RefundController = require('./controller');
 
-
 router.get('', async (req, res) => {
   /* try {
     let trxIds = await RefundController.getTransactions(req, req.query);
@@ -30,6 +29,5 @@ router.patch('', async (req, res) => {
       message: e.message
     })
   } */
-
 });
 module.exports = router;

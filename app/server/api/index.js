@@ -22,8 +22,8 @@ router.use(transactions.config.ENDPOINT, modelProvider.includeModel(transactions
 router.use(refunds.config.ENDPOINT, modelProvider.includeModel(refunds.model), refunds.route);
 /** --route-- */
 (async () => {
-        let redisPubsub = await connectors.pubsub.getPubsubInstance()
-        refunds.subscribe(refunds.config.REFUNDS_TOPIC_NAME, redisPubsub);
+  let redisPubsub = await connectors.pubsub.getPubsubInstance();
+  refunds.subscribe(refunds.config.REFUNDS_TOPIC_NAME, redisPubsub);
 })();
 
 module.exports = router;

@@ -3,10 +3,10 @@ version: '3.9'
 services:
   build_image:
     build: .
-    image: service/payment # use your own image name e.g. rancher/my-app:{VERSION}
+    image: payment-service:1.0.0 # use your own image name e.g. rancher/my-app:{VERSION}
   app_svc:
     container_name: payment-service
-    image: service/payment
+    image: payment-service:1.0.0
     depends_on: [build_image]
     restart: unless-stopped
     env_file: .env
@@ -15,6 +15,7 @@ services:
       - MYSQL_USER=$MYSQL_USER
       - MYSQL_PASSWORD=$MYSQL_PASSWORD
       - MYSQL_HOST=$MYSQL_HOST
+      - MYSQL_PORT=$MYSQL_PORT
       - STORE_ID=$STORE_ID
       - STORE_PASSWORD=$STORE_PASSWORD
       - API_BASE_URL=$API_BASE_URL
@@ -22,9 +23,21 @@ services:
       - 8082:8082
     networks:
       - svc-network
+    command: scripts/startup.sh
+  db:
+    image: mysql:5.7
+    restart: always
+    environment: 
+       MYSQL_DATABASE: 'payment_db'
+       MYSQL_USER: 'root'
+       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql-db:/var/lib/mysql
 networks:
   svc-network:
     driver: bridge
 
 volumes:
-  dbdata:
+  mysql-db:

@@ -15,11 +15,11 @@ function attachWithApp(app) {
 
     logger.log('Error: %s %O', err.message, err.stack);
     res.status(statusCodes.INTERNAL_SERVER_ERROR).send({
-      'message': 'Internal Server Error'
+      message: 'Internal Server Error',
     });
   });
 }
 
 module.exports = {
-  attachWithApp
+  attachWithApp,
 };

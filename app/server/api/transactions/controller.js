@@ -9,9 +9,8 @@ class TransactionController {
       amount: data.totalAmount,
       status: config.STATUS.initiated,
       ssl_transaction_id: transactionId,
-      ssl_session_key: sslResponse.sessionkey
-
-    }
+      ssl_session_key: sslResponse.sessionkey,
+    };
 
     await orm.create(model, transaction);
     await cacheDb.push(config.UNVERIFIED_TRANSACTION_LIST, transactionId);
@@ -31,11 +30,10 @@ class TransactionController {
   static async update(context, data, query) {
     let { orm, model, cacheDb } = context;
     let { status } = data;
-    let { trxId } = query
-    await orm.update(model, trxId, { status })
+    let { trxId } = query;
+    await orm.update(model, trxId, { status });
     await await cacheDb.remove(config.UNVERIFIED_TRANSACTION_LIST, trxId);
     return;
-
   }
 }
 

@@ -3,10 +3,10 @@ const config = {
   STATUS: {
     initiated: 'INITIATED',
     completed: 'COMPLETED',
-    failed: 'FAILED'
+    failed: 'FAILED',
   },
   UNVERIFIED_REFUND_LIST: 'unverified_refunds',
-  REFUNDS_TOPIC_NAME:'refunds'
+  REFUNDS_TOPIC_NAME: 'refunds',
 };
 
 module.exports = config;

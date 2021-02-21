@@ -3,7 +3,7 @@ const modelProvider = require('./model-provider');
 const cacheProvider = require('./cache-provider');
 
 module.exports = {
-        ormProvider,
-        modelProvider,
-        cacheProvider
+  ormProvider,
+  modelProvider,
+  cacheProvider,
 };

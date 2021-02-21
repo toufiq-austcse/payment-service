@@ -19,8 +19,10 @@ const { logger } = require('handlebars');
  */
 async function start(options) {
   options = options || {};
-  options.middlewares = [middlewares.ormProvider.includeOrm(orms.sequelize),
-  middlewares.cacheProvider.includeCacheDb(cache.redisCache)];
+  options.middlewares = [
+    middlewares.ormProvider.includeOrm(orms.sequelize),
+    middlewares.cacheProvider.includeCacheDb(cache.redisCache),
+  ];
 
   const port = options.port || config.DEFAULT_PORT;
   const app = _createApp(options);
@@ -79,8 +81,7 @@ async function _initializeDependentConnections() {
   // the other connections to be made, should follow here
 }
 
-
 module.exports = {
   autoManageShutdown,
-  start
+  start,
 };

@@ -29,9 +29,7 @@ function manage(server) {
     }, config.CONNECTION_CLOSING_TIME);
 
     setTimeout(() => {
-      logger.log(
-        'Could not close connections in time, forcefully shutting down'
-      );
+      logger.log('Could not close connections in time, forcefully shutting down');
       process.exit(1);
     }, config.WAIT_TIME_BEFORE_FORCE_SHUTDOWN);
   };
@@ -51,5 +49,5 @@ function manage(server) {
 }
 
 module.exports = {
-  manage
+  manage,
 };

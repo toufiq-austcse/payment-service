@@ -87,5 +87,5 @@ function initiateWithIndexAndStaticDir(indexPath, staticDirPath) {
 
 module.exports = {
   initiate,
-  initiateWithIndexAndStaticDir
+  initiateWithIndexAndStaticDir,
 };

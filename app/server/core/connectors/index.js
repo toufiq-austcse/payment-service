@@ -3,7 +3,7 @@ const redis = require('./redis');
 const pubsub = require('./pubsub');
 
 module.exports = {
-        sequelize,
-        redis,
-        pubsub
-}
+  sequelize,
+  redis,
+  pubsub,
+};

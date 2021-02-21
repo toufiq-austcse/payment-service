@@ -7,11 +7,10 @@ class RefundController {
     let transaction = await orm.findByOrderId(transactionModel, orderId);
     if (transaction) {
       let refund = {
-        refund_amount: data.refundAmount,
+        refund_amount: refundAmount,
         status: config.STATUS.initiated,
-        transaction_id: transaction.id
-
-      }
+        transaction_id: transaction.id,
+      };
       await orm.create(refundModel, refund);
     }
     /*  

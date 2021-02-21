@@ -13,33 +13,30 @@ router.post('/initiate', async (req, res) => {
     res.redirect(redirectGatewayURL);
   } catch (e) {
     res.status(statusCodes.INTERNAL_SERVER_ERROR).send({
-      message: e.message
-    })
+      message: e.message,
+    });
   }
-
 });
 router.get('', async (req, res) => {
   try {
     let trxIds = await TransactionController.getTransactions(req, req.query);
-    res.status(statusCodes.OK).send({ trxIds })
+    res.status(statusCodes.OK).send({ trxIds });
   } catch (e) {
     console.log(e);
     res.status(statusCodes.INTERNAL_SERVER_ERROR).send({
-      message: e.message
-    })
+      message: e.message,
+    });
   }
-
 });
 router.patch('', async (req, res) => {
   try {
     await TransactionController.update(req, req.body, req.query);
-    res.status(statusCodes.OK).send({})
+    res.status(statusCodes.OK).send({});
   } catch (e) {
     console.log(e);
     res.status(statusCodes.INTERNAL_SERVER_ERROR).send({
-      message: e.message
-    })
+      message: e.message,
+    });
   }
-
 });
 module.exports = router;

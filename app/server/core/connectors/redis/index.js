@@ -4,27 +4,24 @@ const redis = require('redis');
 let redisInstance;
 
 async function connectToRedis() {
-        try {
-                if (!redisInstance) {
-                        redisInstance = redis.createClient();
-                        logger.log('redis connected');
-                }
-              
-        } catch (error) {
-                logger.log('Redis Connection error ', error)
-        }
-
-
+  try {
+    if (!redisInstance) {
+      redisInstance = redis.createClient();
+      logger.log('redis connected');
+    }
+  } catch (error) {
+    logger.log('Redis Connection error ', error);
+  }
 }
 
 async function getRedisInstance() {
-        if (!redisInstance) {
-                await connectToRedis();
-        }
-        return redisInstance;
+  if (!redisInstance) {
+    await connectToRedis();
+  }
+  return redisInstance;
 }
 
 module.exports = {
-        connectToRedis,
-        getRedisInstance
-}
+  connectToRedis,
+  getRedisInstance,
+};

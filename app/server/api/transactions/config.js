@@ -3,9 +3,9 @@ const config = {
   STATUS: {
     initiated: 'INITIATED',
     completed: 'COMPLETED',
-    failed: 'FAILED'
+    failed: 'FAILED',
   },
-  UNVERIFIED_TRANSACTION_LIST: 'unverified_transactions'
+  UNVERIFIED_TRANSACTION_LIST: 'unverified_transactions',
 };
 
 module.exports = config;

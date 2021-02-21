@@ -5,5 +5,5 @@ function throwError(initiatingMethod, errorMessage) {
 }
 
 module.exports = {
-  throwError
+  throwError,
 };

@@ -13,17 +13,15 @@ function subscribe(topic, pubsubInstance) {
         orm: orms.sequelize,
         cacheDb: cache.redisCache,
         transactionModel: transaction.model,
-        refundModel: model
-      }
+        refundModel: model,
+      };
       await RefundController.create(context, msg);
     }
-
-  })
-
+  });
 }
 module.exports = {
   config: require('./config'),
   route: require('./route'),
   model,
-  subscribe
+  subscribe,
 };
