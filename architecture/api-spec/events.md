@@ -1,16 +1,3 @@
-**Payment Status**
-
-        topic: "payments"
-        type: "STATUS"
-        data : {
-                orderId:1,
-                transactionId:1,
-                amount: 50.00,
-                status: "VALID", //VALID, FAILED,CANCELLED,UNATTEMPTED,EXPIRED
-                error:""
-        }
-
-
 **Create Refund**
 
         topic:"refunds"
@@ -29,9 +16,9 @@
 **Refund Status**
 
         topic: "refunds",
-        payload:{
+        message:{
                 type: "STATUS",
-                data:{
+                payload:{
                         orderId:1, //number
                         refundId:1, //number
                         amount: 25.00, //number
