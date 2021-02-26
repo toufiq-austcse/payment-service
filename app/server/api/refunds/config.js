@@ -7,6 +7,8 @@ const config = {
   },
   UNVERIFIED_REFUND_LIST: 'unverified_refunds',
   REFUNDS_TOPIC_NAME: 'refunds',
+  pubInstance: null,
+  subInstance: null,
 };
 
 module.exports = config;

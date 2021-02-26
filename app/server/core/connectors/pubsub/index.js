@@ -1,27 +1,47 @@
 const logger = require('@core/logger');
 const redis = require('redis');
 
-let pubsubInstance;
+let pubInstance;
+let subInstance;
 
-async function connectToPubsub() {
+async function connectToPubInstance() {
   try {
-    if (!pubsubInstance) {
-      pubsubInstance = redis.createClient();
-      logger.log('redis pubsub connected');
+    if (!pubInstance) {
+      pubInstance = redis.createClient();
+      logger.log('connected to redis pub instance');
     }
   } catch (error) {
-    logger.log('Redis pubsub Connection error ', error);
+    logger.log('Redis pub instance Connection error ', error);
   }
 }
 
-async function getPubsubInstance() {
-  if (!pubsubInstance) {
-    await connectToPubsub();
+async function connectToSubInstance() {
+  try {
+    if (!subInstance) {
+      subInstance = redis.createClient();
+      logger.log('connected to redis sub instance');
+    }
+  } catch (error) {
+    logger.log('Redis pub instance Connection error ', error);
   }
-  return pubsubInstance;
 }
 
+async function getPubInstance() {
+  if (!pubInstance) {
+    await connectToPubInstance();
+  }
+  return pubInstance;
+}
+
+async function getSubInstance() {
+  if (!subInstance) {
+    await connectToSubInstance();
+  }
+  return subInstance;
+}
 module.exports = {
-  connectToPubsub,
-  getPubsubInstance,
+  connectToPubInstance,
+  getPubInstance,
+  connectToSubInstance,
+  getSubInstance,
 };

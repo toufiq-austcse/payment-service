@@ -16,6 +16,15 @@ async function get(key) {
   });
 }
 
+async function set(key, data) {
+  console.log('setting ',data);
+  let redis = await connectors.redis.getRedisInstance();
+  return redis.set(key, data);
+}
+async function deleteKey(key) {
+  let redis = await connectors.redis.getRedisInstance();
+  return redis.del(key);
+}
 async function remove(key, data) {
   let redis = await connectors.redis.getRedisInstance();
   return redis.lrem(key, 0, data);
@@ -24,5 +33,7 @@ async function remove(key, data) {
 module.exports = {
   push,
   remove,
+  set,
+  deleteKey,
   get,
 };

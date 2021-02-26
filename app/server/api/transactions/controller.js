@@ -31,7 +31,7 @@ class TransactionController {
     let { orm, model, cacheDb } = context;
     let { status } = data;
     let { trxId } = query;
-    await orm.update(model, trxId, { status });
+    await orm.updateTransaction(model, trxId, { status });
     await await cacheDb.remove(config.UNVERIFIED_TRANSACTION_LIST, trxId);
     return;
   }

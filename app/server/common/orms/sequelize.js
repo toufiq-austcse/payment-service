@@ -6,7 +6,7 @@ async function create(model, data) {
   const createdData = await model(sequelize).create(data);
   return createdData;
 }
-async function update(model, trxId, data) {
+async function updateTransaction(model, trxId, data) {
   let sequelize = await connectors.sequelize.getSeqInstance();
   await model(sequelize).update(data, {
     where: {
@@ -14,6 +14,16 @@ async function update(model, trxId, data) {
     },
   });
 }
+
+async function updateRefund(model, refundId, data) {
+  let sequelize = await connectors.sequelize.getSeqInstance();
+  await model(sequelize).update(data, {
+    where: {
+      id: refundId,
+    },
+  });
+}
+
 
 async function findTransactionByOrderId(model, orderId) {
   let sequelize = await connectors.sequelize.getSeqInstance();
@@ -25,6 +35,7 @@ async function findTransactionByOrderId(model, orderId) {
 }
 module.exports = {
   create,
-  update,
+  updateTransaction: updateTransaction,
+  updateRefund:updateRefund,
   findByOrderId: findTransactionByOrderId,
 };

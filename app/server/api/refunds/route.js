@@ -8,26 +8,25 @@ const router = express.Router({ mergeParams: true });
 const RefundController = require('./controller');
 
 router.get('', async (req, res) => {
-  /* try {
-    let trxIds = await RefundController.getTransactions(req, req.query);
-    res.status(statusCodes.OK).send({ trxIds })
+  try {
+    let refundIds = await RefundController.getRefunds(req, req.query);
+    res.status(statusCodes.OK).send({ refundIds });
   } catch (e) {
     console.log(e);
     res.status(statusCodes.INTERNAL_SERVER_ERROR).send({
-      message: e.message
-    })
+      message: e.message,
+    });
   }
- */
 });
 router.patch('', async (req, res) => {
-  /* try {
+  try {
     await RefundController.update(req, req.body, req.query);
-    res.status(statusCodes.OK).send({})
+    res.status(statusCodes.OK).send({});
   } catch (e) {
     console.log(e);
     res.status(statusCodes.INTERNAL_SERVER_ERROR).send({
-      message: e.message
-    })
-  } */
+      message: e.message,
+    });
+  }
 });
 module.exports = router;

@@ -14,11 +14,14 @@
 **Create Refund**
 
         topic:"refunds"
-        type:"CREATE"
-        data:{
-                orderId:1,
-                refundAmount:50.00,
-                refundMarks:"reason of refund"     
+        message:{
+                type:"CREATE"
+                payload:{
+                        orderId:1, //number
+                        refundAmount:50.00, //number
+                        refundMarks:"reason of refund" /string   
+                }
+               
         }
 
 
@@ -26,11 +29,14 @@
 **Refund Status**
 
         topic: "refunds",
-        type: "STATUS",
-        data:{
-                orderId:1,
-                refundId:1,
-                amount: 25.00,
-                status:"REFUNDED", //REFUNDED,CANCELLED
-                error:""
+        payload:{
+                type: "STATUS",
+                data:{
+                        orderId:1, //number
+                        refundId:1, //number
+                        amount: 25.00, //number
+                        status:"REFUNDED", //REFUNDED,CANCELLED
+                        error:"" //string
+                }
         }
+       
