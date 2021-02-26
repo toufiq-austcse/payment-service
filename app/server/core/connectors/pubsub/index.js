@@ -5,9 +5,13 @@ let pubInstance;
 let subInstance;
 
 async function connectToPubInstance() {
+  let { REDIS_HOST, REDIS_PORT } = process.env;
   try {
     if (!pubInstance) {
-      pubInstance = redis.createClient();
+      pubInstance = redis.createClient({
+        host: REDIS_HOST,
+        port: REDIS_PORT,
+      });
       logger.log('connected to redis pub instance');
     }
   } catch (error) {
@@ -16,9 +20,13 @@ async function connectToPubInstance() {
 }
 
 async function connectToSubInstance() {
+  let { REDIS_HOST, REDIS_PORT } = process.env;
   try {
     if (!subInstance) {
-      subInstance = redis.createClient();
+      subInstance = redis.createClient({
+        host: REDIS_HOST,
+        port: REDIS_PORT,
+      });
       logger.log('connected to redis sub instance');
     }
   } catch (error) {
