@@ -5,7 +5,6 @@ let gateways = require('../server/core/gateways');
 const { API_BASE_URL } = process.env;
 
 cron.schedule('* * * * *', async () => {
-  console.log('called');
   await verifyTransaction();
   await verifyRefunds();
 });

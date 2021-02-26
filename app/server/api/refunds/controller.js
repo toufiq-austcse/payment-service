@@ -23,10 +23,12 @@ class RefundController {
         await cacheDb.push(config.UNVERIFIED_REFUND_LIST, newRefundData.id);
 
         await cacheDb.set(
-         '1',"sadi"
+          newRefundData.id,
+          JSON.stringify({
+            refundAmount,
+            orderId,
+          })
         );
-        let a = await cacheDb.get('1');
-        console.log(a);
       }
     }
   }
@@ -36,7 +38,7 @@ class RefundController {
     let { status } = query;
     let ids = [];
     if (status === config.STATUS.initiated) {
-      ids = await cacheDb.get(config.UNVERIFIED_REFUND_LIST);
+      ids = await cacheDb.getFromList(config.UNVERIFIED_REFUND_LIST);
     }
 
     return ids;
@@ -48,13 +50,11 @@ class RefundController {
     await orm.updateRefund(model, refundId, { status });
     await await cacheDb.remove(config.UNVERIFIED_REFUND_LIST, refundId);
     let order = await cacheDb.get(refundId);
-
-    console.log('order ', order);
-    /* if (order) {
-      let { orderId, refundAmount } = order;
+    if (order) {
+      let { orderId, refundAmount } = JSON.parse(order);
       let completedMsg = {
         type: 'STATUS',
-        data: {
+        payload: {
           orderId: orderId,
           refundId: refundId,
           amount: refundAmount,
@@ -63,7 +63,8 @@ class RefundController {
         },
       };
       await config.pubInstance.publish(config.REFUNDS_TOPIC_NAME, JSON.stringify(completedMsg));
-    } */
+      await cacheDb.deleteKey(refundId);
+    }
 
     return;
   }

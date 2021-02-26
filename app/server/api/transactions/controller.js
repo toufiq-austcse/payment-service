@@ -22,7 +22,7 @@ class TransactionController {
     let { status } = query;
     let ids = [];
     if (status === config.STATUS.initiated) {
-      ids = await cacheDb.get(config.UNVERIFIED_TRANSACTION_LIST);
+      ids = await cacheDb.getFromList(config.UNVERIFIED_TRANSACTION_LIST);
     }
 
     return ids;
